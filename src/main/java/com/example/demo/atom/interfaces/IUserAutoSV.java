@@ -10,4 +10,9 @@ public interface IUserAutoSV {
   PageResult<User> selectByExample(UserExample example, User user, PageArg pageArg);
 
   int addUser(User user);
+
+  int deleteByPrimaryKey(Integer id);
+
+  User selectByPrimaryKey(Integer id);
+
 }

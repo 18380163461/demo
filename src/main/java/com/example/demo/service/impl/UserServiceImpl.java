@@ -10,6 +10,7 @@ import com.example.demo.model.QueryUsersRequest;
 import com.example.demo.service.interfaces.IUserService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -17,6 +18,8 @@ public class UserServiceImpl implements IUserService {
 
   @Autowired
   IUserAutoSV iUserAutoSV;
+  @Autowired
+  RedisTemplate redisTemplate;
 
   @Override
   public BaseResponse<PageResult<User>> queryUsers(QueryUsersRequest request) {
@@ -30,13 +33,31 @@ public class UserServiceImpl implements IUserService {
   }
 
   @Override
-  public int addUser(QueryUsersRequest request) {
+  public BaseResponse<Integer> addUser(QueryUsersRequest request) {
+    BaseResponse<Integer> response = new BaseResponse<>(true, BusinessConstants.BUSI_SUCCESS_CODE, BusinessConstants.BUSI_SUCCESS_MESSAGE);
     User user = new User();
     BeanUtils.copyProperties(request, user);
     int result = iUserAutoSV.addUser(user);
     if (request.getName().contains("A")) {
       throw new RuntimeException("异常");
     }
-    return result;
+    response.setResult(result);
+    return response;
+  }
+
+  @Override
+  public BaseResponse<Integer> deleteByPrimaryKey(Integer id) {
+    BaseResponse<Integer> response = new BaseResponse<>(true, BusinessConstants.BUSI_SUCCESS_CODE, BusinessConstants.BUSI_SUCCESS_MESSAGE);
+    int result = iUserAutoSV.deleteByPrimaryKey(id);
+    response.setResult(result);
+    return response;
+  }
+
+  @Override
+  public BaseResponse<User> selectByPrimaryKey(Integer id) {
+    BaseResponse<User> response = new BaseResponse<>(true, BusinessConstants.BUSI_SUCCESS_CODE, BusinessConstants.BUSI_SUCCESS_MESSAGE);
+    User result = iUserAutoSV.selectByPrimaryKey(id);
+    response.setResult(result);
+    return response;
   }
 }

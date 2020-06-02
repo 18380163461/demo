@@ -7,6 +7,9 @@
 * 数据库连接池使用druid
 * dao层使用的mybatis
 * API文档使用Swagger
+* 分页使用PageHelper
+
 ## 页面和地址
 * druid监控页面：http://127.0.0.1:8080/test/druid/index.html
 * Swagger页面地址：http://localhost:8080/test/swagger-ui.html
+* 启动本机redis命令：cd C:\1A\redis    redis-server.exe redis.windows.conf

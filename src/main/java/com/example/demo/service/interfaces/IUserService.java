@@ -9,6 +9,10 @@ public interface IUserService {
 
   BaseResponse<PageResult<User>> queryUsers(QueryUsersRequest request);
 
-  int addUser(QueryUsersRequest request);
+  BaseResponse<Integer> addUser(QueryUsersRequest request);
+
+  BaseResponse<Integer> deleteByPrimaryKey(Integer id);
+
+  BaseResponse<User> selectByPrimaryKey(Integer id);
 
 }
