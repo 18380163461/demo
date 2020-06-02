@@ -1,12 +1,13 @@
 package com.example.demo.atom.interfaces;
 
 import com.example.demo.dao.mapper.bo.User;
-import com.example.demo.model.QueryUsersRequest;
-import java.util.List;
+import com.example.demo.dao.mapper.bo.UserExample;
+import com.example.demo.model.PageArg;
+import com.example.demo.model.PageResult;
 
 public interface IUserAutoSV {
 
-  List<User> selectByExample(QueryUsersRequest request);
+  PageResult<User> selectByExample(UserExample example, User user, PageArg pageArg);
 
-  int addUser(QueryUsersRequest request);
+  int addUser(User user);
 }

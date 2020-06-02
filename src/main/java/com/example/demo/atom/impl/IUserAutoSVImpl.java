@@ -3,11 +3,12 @@ package com.example.demo.atom.impl;
 import com.example.demo.atom.interfaces.IUserAutoSV;
 import com.example.demo.dao.mapper.bo.User;
 import com.example.demo.dao.mapper.bo.UserExample;
-import com.example.demo.dao.mapper.bo.UserExample.Criteria;
 import com.example.demo.dao.mapper.interfaces.UserMapper;
-import com.example.demo.model.QueryUsersRequest;
+import com.example.demo.model.PageArg;
+import com.example.demo.model.PageResult;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import java.util.List;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
@@ -20,18 +21,27 @@ public class IUserAutoSVImpl implements IUserAutoSV {
   UserMapper mapper;
 
   @Override
-  public List<User> selectByExample(QueryUsersRequest request) {
-    User user = new User();
-    BeanUtils.copyProperties(request, user);
-    UserExample example = new UserExample();
-    Criteria criteria = example.createCriteria();
-    return mapper.selectByExample(buildExample(example, user));
+  public PageResult<User> selectByExample(UserExample example, User user, PageArg pageArg) {
+    PageResult<User> result = new PageResult<>();
+    if (ObjectUtils.isEmpty(pageArg) || pageArg.getPageNum() < 1 || pageArg.getPageSize() < 1) {
+      pageArg = new PageArg(1, 10);
+    }
+    try {
+      PageHelper.startPage(pageArg.getPageNum(), pageArg.getPageSize());
+      List<User> list = mapper.selectByExample(buildExample(example, user));
+      result.setResult(list);
+      result.setSuccess(true);
+      result.setPageNum(pageArg.getPageNum());
+      result.setPageSize(pageArg.getPageSize());
+      result.setCount(((Page<User>) list).getTotal());
+    } finally {
+      PageHelper.clearPage();
+    }
+    return result;
   }
 
   @Override
-  public int addUser(QueryUsersRequest request) {
-    User user = new User();
-    BeanUtils.copyProperties(request, user);
+  public int addUser(User user) {
     return mapper.insert(user);
   }
 

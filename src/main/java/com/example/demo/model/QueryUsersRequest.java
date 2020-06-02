@@ -2,11 +2,21 @@ package com.example.demo.model;
 
 public class QueryUsersRequest {
 
+  PageArg pageArg;
+
   private Integer id;
 
   private String name;
 
   private Integer age;
+
+  public PageArg getPageArg() {
+    return pageArg;
+  }
+
+  public void setPageArg(PageArg pageArg) {
+    this.pageArg = pageArg;
+  }
 
   public Integer getId() {
     return id;

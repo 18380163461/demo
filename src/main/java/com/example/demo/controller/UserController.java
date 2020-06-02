@@ -1,11 +1,12 @@
 package com.example.demo.controller;
 
 import com.example.demo.dao.mapper.bo.User;
+import com.example.demo.model.BaseResponse;
+import com.example.demo.model.PageResult;
 import com.example.demo.model.QueryUsersRequest;
 import com.example.demo.service.interfaces.IUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,8 +21,8 @@ public class UserController {
 
   @ApiOperation(value = "value 查询所有用户", notes = "notes查询所有用户")
   @GetMapping("queryUsers")
-  public List<User> queryUsers(QueryUsersRequest request) {
-    List<User> users = iUserService.queryUsers(request);
+  public BaseResponse queryUsers(QueryUsersRequest request) {
+    BaseResponse<PageResult<User>> users = iUserService.queryUsers(request);
     return users;
   }
 
