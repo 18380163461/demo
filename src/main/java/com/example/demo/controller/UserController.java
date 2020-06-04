@@ -8,6 +8,7 @@ import com.example.demo.model.QueryUsersRequest;
 import com.example.demo.service.interfaces.IUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import java.util.Random;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,21 +45,54 @@ public class UserController {
     return response;
   }
 
+  Random random = new Random();
+
+  @GetMapping("queryUserByRandom")
+  public BaseResponse queryUserByRandom() {
+    int id = random.nextInt(1000000);
+    BaseResponse<User> response = null;
+    try {
+      response = iUserService.selectByPrimaryKey(id);
+    } catch (Exception e) {
+      LOGGER.error("{}", e.getMessage(), e);
+      response = new BaseResponse<>(false, BusinessConstants.BUSI_FAILURE_CODE, BusinessConstants.BUSI_FAILURE_MESSAGE);
+    }
+    return response;
+  }
+
   @GetMapping("queryUserByid")
   public BaseResponse queryUserByid(Integer id) {
-    BaseResponse<User> response = iUserService.selectByPrimaryKey(id);
+    BaseResponse<User> response = null;
+    try {
+      response = iUserService.selectByPrimaryKey(id);
+    } catch (Exception e) {
+      LOGGER.error("{}", e.getMessage(), e);
+      response = new BaseResponse<>(false, BusinessConstants.BUSI_FAILURE_CODE, BusinessConstants.BUSI_FAILURE_MESSAGE);
+    }
     return response;
   }
 
   @PutMapping("updateUserByid")
   public BaseResponse updateUserByid(User user) {
-    BaseResponse<User> response = iUserService.updateByPrimaryKey(user);
+    BaseResponse<User> response = null;
+    try {
+      response = iUserService.updateByPrimaryKey(user);
+    } catch (Exception e) {
+      LOGGER.error("{}", e.getMessage(), e);
+      response = new BaseResponse<>(false, BusinessConstants.BUSI_FAILURE_CODE, BusinessConstants.BUSI_FAILURE_MESSAGE);
+    }
     return response;
   }
 
   @GetMapping("deleteById")
   public BaseResponse deleteById(Integer id) {
-    BaseResponse<Integer> response = iUserService.deleteByPrimaryKey(id);
+    BaseResponse<Integer> response = null;
+    try {
+      response = iUserService.deleteByPrimaryKey(id);
+    } catch (Exception e) {
+      LOGGER.error("{}", e.getMessage(), e);
+      response = new BaseResponse<>(false, BusinessConstants.BUSI_FAILURE_CODE, BusinessConstants.BUSI_FAILURE_MESSAGE);
+    }
     return response;
   }
 }

@@ -10,7 +10,7 @@ import org.springframework.data.redis.serializer.RedisSerializationContext;
 @Configuration
 public class RedisConfig {
 
-  private Duration timeToLive = Duration.ofSeconds(10);//设置5秒过期
+  private Duration timeToLive = Duration.ofSeconds(500);//设置5秒过期
 
   @Bean
   public RedisCacheConfiguration redisCacheConfiguration() {
