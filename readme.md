@@ -2,6 +2,7 @@
 
 # 新架构test
 ## 更新于2020年05月01日
+* 建表语句在根目录下create_table.sql
 * 配置中心使用nacos
 * 服务注册和发现使用naco
 * 数据库连接池使用druid

@@ -15,4 +15,6 @@ public interface IUserAutoSV {
 
   User selectByPrimaryKey(Integer id);
 
+  int updateByPrimaryKey(User record);
+
 }

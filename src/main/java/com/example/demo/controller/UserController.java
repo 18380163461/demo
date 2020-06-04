@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @Api(description = "用户操作接口")
@@ -46,6 +47,12 @@ public class UserController {
   @GetMapping("queryUserByid")
   public BaseResponse queryUserByid(Integer id) {
     BaseResponse<User> response = iUserService.selectByPrimaryKey(id);
+    return response;
+  }
+
+  @PutMapping("updateUserByid")
+  public BaseResponse updateUserByid(User user) {
+    BaseResponse<User> response = iUserService.updateByPrimaryKey(user);
     return response;
   }
 

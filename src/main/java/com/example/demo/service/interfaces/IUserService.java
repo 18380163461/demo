@@ -15,4 +15,6 @@ public interface IUserService {
 
   BaseResponse<User> selectByPrimaryKey(Integer id);
 
+  BaseResponse<User> updateByPrimaryKey(User record);
+
 }

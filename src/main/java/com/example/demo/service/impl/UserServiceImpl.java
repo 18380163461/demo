@@ -10,6 +10,8 @@ import com.example.demo.model.QueryUsersRequest;
 import com.example.demo.service.interfaces.IUserService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
@@ -54,10 +56,20 @@ public class UserServiceImpl implements IUserService {
   }
 
   @Override
+  @Cacheable(value = "User", key = "#id")
   public BaseResponse<User> selectByPrimaryKey(Integer id) {
     BaseResponse<User> response = new BaseResponse<>(true, BusinessConstants.BUSI_SUCCESS_CODE, BusinessConstants.BUSI_SUCCESS_MESSAGE);
     User result = iUserAutoSV.selectByPrimaryKey(id);
     response.setResult(result);
+    return response;
+  }
+
+  @Override
+  @CachePut(value = "User", key = "#record.id")
+  public BaseResponse<User> updateByPrimaryKey(User record) {
+    BaseResponse<User> response = new BaseResponse<>(true, BusinessConstants.BUSI_SUCCESS_CODE, BusinessConstants.BUSI_SUCCESS_MESSAGE);
+    int result = iUserAutoSV.updateByPrimaryKey(record);
+    response.setResult(record);
     return response;
   }
 }

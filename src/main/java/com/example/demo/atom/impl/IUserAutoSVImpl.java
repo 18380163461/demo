@@ -8,7 +8,6 @@ import com.example.demo.model.PageArg;
 import com.example.demo.model.PageResult;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import java.util.HashMap;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -17,8 +16,6 @@ import org.springframework.util.ObjectUtils;
 
 @Component
 public class IUserAutoSVImpl implements IUserAutoSV {
-
-  HashMap<Integer, User> hashMap = new HashMap<>();
 
   @Autowired
   UserMapper mapper;
@@ -56,15 +53,13 @@ public class IUserAutoSVImpl implements IUserAutoSV {
 
   @Override
   public User selectByPrimaryKey(Integer id) {
-    /*if (hashMap.containsKey(id)) {
-      return hashMap.get(id);
-    } else {
-      User user = mapper.selectByPrimaryKey(id);
-      hashMap.put(id, user);
-      return user;
-    }*/
     return mapper.selectByPrimaryKey(id);
 
+  }
+
+  @Override
+  public int updateByPrimaryKey(User record) {
+    return mapper.updateByPrimaryKey(record);
   }
 
   private UserExample buildExample(UserExample example, User obj) {
