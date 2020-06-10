@@ -21,7 +21,6 @@ public class TransactionAdviceConfig {
 
   @Autowired
   private PlatformTransactionManager transactionManager;
-
   @Bean
   public TransactionInterceptor txAdvice() {
 

@@ -9,6 +9,7 @@
 * dao层使用的mybatis
 * API文档使用Swagger
 * 分页使用PageHelper
+* 权限控制Spring Security
 
 ## 页面和地址
 * druid监控页面：http://127.0.0.1:8080/test/druid/index.html
