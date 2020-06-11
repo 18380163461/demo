@@ -3,10 +3,7 @@ package com.example.demo.config;
 import cn.hutool.core.util.ReflectUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.lang.reflect.Method;
-import java.util.HashMap;
-import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -63,7 +60,7 @@ public class ControllerAspect {
     //获取连接点方法运行时的入参列表
     Object[] args = joinPoint.getArgs();
     //将参数名称与入参值一一对应起来
-    Map<String, Object> params = new HashMap<>();
+//    Map<String, Object> params = new HashMap<>();
     //自己写的一个判空类方法
     if (!ObjectUtils.isEmpty(parameterNames)) {
       for (int i = 0; i < parameterNames.length; i++) {
@@ -71,10 +68,10 @@ public class ControllerAspect {
         if (ObjectUtils.isEmpty(args[i])) {
           continue;
         }
-        //通过所在类转换，获取值，包含各种封装类都可以
-        ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.convertValue(args[i], args[i].getClass());
-        params.put(parameterNames[i], JSON.toJSON(objectMapper.convertValue(args[i], args[i].getClass())));
+//        //通过所在类转换，获取值，包含各种封装类都可以
+//        ObjectMapper objectMapper = new ObjectMapper();
+//        objectMapper.convertValue(args[i], args[i].getClass());
+//        params.put(parameterNames[i], JSON.toJSON(objectMapper.convertValue(args[i], args[i].getClass())));
       }
     }
     logger.info("URL : " + request.getRequestURL().toString());
@@ -82,7 +79,7 @@ public class ControllerAspect {
     logger.info("IP : " + request.getRemoteAddr());
     logger.info("CLASS_METHOD : " + joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName());
     //这里经过处理，就可以获得参数名字与值一一对应
-    logger.info("ARGS-JSON : " + params);
+//    logger.info("ARGS-JSON : " + params);
   }
 
 
