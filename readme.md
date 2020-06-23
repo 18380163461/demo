@@ -15,3 +15,4 @@
 * druid监控页面：http://127.0.0.1:8080/test/druid/index.html
 * Swagger页面地址：http://localhost:8080/test/swagger-ui.html
 * 启动本机redis命令：cd C:\1A\redis    redis-server.exe redis.windows.conf
+* actuator 监控  http://localhost:8080/test/actuator/health
