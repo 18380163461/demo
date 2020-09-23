@@ -16,4 +16,4 @@
 * Swagger页面地址：http://localhost:8080/test/swagger-ui.html
 * 启动本机redis命令：cd C:\1A\redis    redis-server.exe redis.windows.conf
 * actuator 监控  http://localhost:8080/test/actuator/health
-* 系统参数表结构：create table GRID_ASMT_PARAMS(  id          NUMBER(15) not null,  type        VARCHAR2(64),  type_desc   VARCHAR2(64),  param_level NUMBER(5),  code        VARCHAR2(64),  name        VARCHAR2(64),  parent_id   NUMBER(15),  state       NUMBER(5));
+* 系统参数表结构：CREATE TABLE GRID_ASMT_PARAMS (	id NUMBER (15) NOT NULL,	parent_id NUMBER (15),	type VARCHAR2 (64),	type_desc VARCHAR2 (64),	type_level NUMBER (5),	CODE VARCHAR2 (64),	NAME VARCHAR2 (64),	state NUMBER (5),	remark VARCHAR2 (64));
