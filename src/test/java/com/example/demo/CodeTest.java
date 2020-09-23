@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import com.alibaba.fastjson.JSONObject;
 import com.example.demo.dao.mapper.bo.User;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -460,6 +461,26 @@ public class CodeTest {
       }
       System.out.println(stringBuilder.toString());
     }
+  }
 
+  public static void main(String[] args) {
+    User a= JSONObject.parseObject("",User.class);
+    System.out.println(a);
+    /*//生成代码
+    Class<GsopGridSysParam> cls=GsopGridSysParam.class;
+    StringBuilder stringBuilder = new StringBuilder();
+    Field[] declaredFields = cls.getDeclaredFields();
+    for (Field field : declaredFields) {
+      if (field.getGenericType().toString().equals("class java.util.Date")) {
+        continue;
+      } else {
+        String name = field.getName();
+        name = name.substring(0, 1).toUpperCase() + name.substring(1);
+        String str = "if (!ObjectUtils.isEmpty(obj.get" + name + "())) { criteria.and" + name + "EqualTo(obj.get" + name + "());}";
+        stringBuilder.append(str);
+      }
+    }
+    System.out.println(stringBuilder.toString());
+*/
   }
 }
