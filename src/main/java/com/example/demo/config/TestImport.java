@@ -1,6 +1,11 @@
 package com.example.demo.config;
 
-public class TestImport {
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.config.BeanPostProcessor;
+import org.springframework.stereotype.Component;
+
+@Component
+public class TestImport implements BeanPostProcessor {
 
   private String age;
   private String name;
@@ -11,6 +16,18 @@ public class TestImport {
 
   public TestImport(String age, String name) {
     this(age, name, "");
+  }
+
+  @Override
+  public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
+    System.out.println("处理之前");
+    return bean;
+  }
+
+  @Override
+  public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
+    System.out.println("处理之后");
+    return bean;
   }
 
   public TestImport(String age, String name, String sex) {

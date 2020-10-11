@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
+import com.example.demo.dao.mapper.bo.Dep;
 import com.example.demo.dao.mapper.bo.User;
 import java.util.HashMap;
 import java.util.Map;
@@ -26,6 +27,10 @@ public class LoginController {
     user.setName(userName);
     user.setAge(99);
     user.setId(1);
+    Dep dep=new Dep();
+    dep.setId("11111");
+    dep.setName("AAAAAAAA");
+    user.setDep(dep);
     httpSession.setAttribute("userInfo", JSON.toJSONString(user));
     // 添加sessionID到Map
     Map<String, Object> map = new HashMap<>();
