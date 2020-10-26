@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @Api(description = "用户操作接口")
@@ -27,7 +28,7 @@ public class UserController {
 
   @ApiOperation(value = "value 查询所有用户", notes = "notes查询所有用户")
   @GetMapping("queryUsers")
-  public BaseResponse queryUsers(QueryUsersRequest request) {
+  public BaseResponse queryUsers(@RequestBody QueryUsersRequest request) {
     BaseResponse<PageResult<User>> users = iUserService.queryUsers(request);
     return users;
   }

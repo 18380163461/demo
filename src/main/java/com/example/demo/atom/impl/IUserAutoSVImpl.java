@@ -1,5 +1,6 @@
 package com.example.demo.atom.impl;
 
+import com.alibaba.fastjson.JSONObject;
 import com.example.demo.atom.interfaces.IUserAutoSV;
 import com.example.demo.dao.mapper.bo.User;
 import com.example.demo.dao.mapper.bo.UserExample;
@@ -8,7 +9,10 @@ import com.example.demo.model.PageArg;
 import com.example.demo.model.PageResult;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
@@ -16,6 +20,8 @@ import org.springframework.util.ObjectUtils;
 
 @Component
 public class IUserAutoSVImpl implements IUserAutoSV {
+
+  private static final Logger LOGGER = LoggerFactory.getLogger(IUserAutoSVImpl.class);
 
   @Autowired
   UserMapper mapper;
@@ -29,6 +35,12 @@ public class IUserAutoSVImpl implements IUserAutoSV {
     try {
       PageHelper.startPage(pageArg.getPageNum(), pageArg.getPageSize());
       List<User> list = mapper.selectByExample(buildExample(example, user));
+      LOGGER.debug("list:{}", JSONObject.toJSONString(list));
+      Page<User> page = (Page<User>) list;
+      LOGGER.debug("Page.getTotal:{}", page.getTotal());
+      LOGGER.debug("Page:{}", JSONObject.toJSONString(page));
+      LOGGER.debug("PageInfo:{}", JSONObject.toJSONString(new PageInfo(list)));
+
       result.setResult(list);
       result.setSuccess(true);
       result.setPageNum(pageArg.getPageNum());
