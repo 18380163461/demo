@@ -4,6 +4,7 @@ import com.example.demo.atom.interfaces.IUserAutoSV;
 import com.example.demo.constants.BusinessConstants;
 import com.example.demo.dao.mapper.bo.User;
 import com.example.demo.dao.mapper.bo.UserExample;
+import com.example.demo.dao.mapper.bo.UserExample.Criteria;
 import com.example.demo.model.BaseResponse;
 import com.example.demo.model.PageResult;
 import com.example.demo.model.QueryUsersRequest;
@@ -25,8 +26,12 @@ public class UserServiceImpl implements IUserService {
 
   @Override
   public BaseResponse<PageResult<User>> queryUsers(QueryUsersRequest request) {
+
+
     BaseResponse<PageResult<User>> response = new BaseResponse<>(true, BusinessConstants.BUSI_SUCCESS_CODE, BusinessConstants.BUSI_SUCCESS_MESSAGE);
     UserExample example = new UserExample();
+    Criteria criteria = example.createCriteria();
+    criteria.andNameLike("名称%");
     User user = new User();
     BeanUtils.copyProperties(request, user);
     PageResult<User> pageResult = iUserAutoSV.selectByExample(example, user, request.getPageArg());

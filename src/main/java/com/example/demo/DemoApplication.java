@@ -15,6 +15,8 @@ import org.springframework.session.data.redis.config.annotation.web.http.EnableR
 public class DemoApplication {
 
   public static void main(String[] args) {
+    System.setProperty("sun.misc.ProxyGenerator.saveGeneratedFiles","true");
+    System.getProperties().put("jdk.proxy.ProxyGenerator.saveGeneratedFiles", "true");
     SpringApplication.run(DemoApplication.class, args);
   }
 

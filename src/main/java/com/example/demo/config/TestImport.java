@@ -2,9 +2,8 @@ package com.example.demo.config;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
-import org.springframework.stereotype.Component;
 
-@Component
+//@Component
 public class TestImport implements BeanPostProcessor {
 
   private String age;
